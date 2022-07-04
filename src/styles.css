@@ -1,0 +1,31 @@
+body {
+  font-family: "Source Code Pro", monospace;
+  color: #939aa9;
+}
+
+.temperature-value {
+  color: #fe9b09;
+}
+
+.weather-widget {
+  width: 100%;
+  max-width: 1240px;
+  margin: 20px auto;
+}
+
+.degree {
+  text-decoration: none;
+  color: #939aa9;
+  font-size: 24px;
+}
+
+.degree.active {
+  color: #fe9b09;
+}
+
+.pipe {
+  display: inline-block;
+  height: 15px;
+  width: 3px;
+  background-color: #939aa9;
+}
