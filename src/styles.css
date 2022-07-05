@@ -30,22 +30,22 @@ body {
   background-color: #939aa9;
 }
 
-.autor-weather-widget {
+.author-weather-widget {
   padding: 20px;
-  color: orange;
   font-size: 20px;
   display: flex;
   align-items: center;
   justify-content: end;
   gap: 20px;
+  color: #7B7F85;
 }
 
-.autor-weather-widget__social-link {
+.author-weather-widget__social-link {
   width: 100%;
   max-width: 25px;
 }
 
-.autor-weather-widget_autor-image {
+.author-weather-widget_author-image {
   width: 100%;
-  max-width: 50px;
+  max-width: 70px;
 }
