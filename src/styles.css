@@ -49,3 +49,10 @@ body {
   width: 100%;
   max-width: 70px;
 }
+
+.btn-rounded {
+  border-radius: 19px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-left: 3px;
+}
