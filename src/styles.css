@@ -31,13 +31,12 @@ body {
 }
 
 .author-weather-widget {
-  padding-top: 20px;
-  font-size: 20px;
+  font-size: 16px;
   display: flex;
   align-items: center;
   justify-content: end;
   gap: 20px;
-  color: #7B7F85;
+  color: #7b7f85;
 }
 
 .author-weather-widget__social-link {
@@ -47,7 +46,7 @@ body {
 
 .author-weather-widget_author-image {
   width: 100%;
-  max-width: 70px;
+  max-width: 50px;
 }
 
 .btn-rounded {

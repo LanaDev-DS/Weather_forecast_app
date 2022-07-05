@@ -19,7 +19,7 @@
   </head>
   <body>
     <section class="weather-widget">
-      <div class="container border p-5">
+      <div class="container border pt-5 pb-4 ps-5 pe-5">
         <div class="row justify-content-between">
           <div class="col-4">
             <h1 id="city"></h1>
@@ -31,30 +31,32 @@
                 type="text"
                 class="form-control shadow"
                 placeholder="Search city here"
+                style="height: 48px;"
                 
               />
               <button
                 id="basic-addon2"
                 type="submit"
-                class="input-group-text shadow">
+                class="input-group-text shadow"
+                style="height: 48px;">
                 <i class="bi bi-search">
                 </i>
               </button>
             </form>
           </div>
-          <div class="col-4">
-            <button type="button" class="btn btn-light btn-md btn-rounded" id="current-location">
+          <div class="col-4 text-end">
+            <button type="button" class="btn btn-light btn-md btn-rounded shadow" id="current-location">
               <img src="src/images/icons8-location-64.png" width="40" class="rounded-circle bg-white" style="padding: 7px 7px;" alt="Location"/>Current position
             </button>
           </div>
         </div>
-        <div class="row mb-5">
+        <div class="row mb-4">
           <span class="h5" id="data"></span>
         </div>
         <div class="row mb-2">
           <span class="h3">Today</span>
         </div>
-        <div class="row align-items-center border mb-5 shadow p-3 mb-5 bg-body rounded">
+        <div class="row align-items-center border mb-5 shadow mb-5 bg-body rounded">
           <div class="col align-items-center text-center">
             <span class="display-1 temperature-value" id="temperature"></span>
             <a href="#" class="active degree" id="celsius">°C</a>
@@ -92,7 +94,7 @@
               <div class="col"><img src="src/images/rainy.png" class="img-fluid" alt="Sunny"></div>
             </div>
           </div>
-          <div class="col-2 border shadow p-3 mb-5 bg-body rounded">
+          <div class="col-2 border shadow p-3 mb-4 bg-body rounded">
             <ul class="list-unstyled">
               <li class="h5">Friday</li>
               <li class="h6">Sunny</li>
@@ -103,7 +105,7 @@
               <div class="col"><img src="src/images/party_sunny.png" class="img-fluid" alt="Sunny"></div>
             </div>
           </div>
-          <div class="col-2 border shadow p-3 mb-5 bg-body rounded">
+          <div class="col-2 border shadow p-3 mb-4 bg-body rounded">
             <ul class="list-unstyled">
               <li class="h5">Saturday</li>
               <li class="h6">Cloudy</li>
@@ -114,7 +116,7 @@
               <div class="col"><img src="src/images/party_cloudy.png" class="img-fluid" alt="Sunny"></div>
             </div>
           </div>
-          <div class="col-2 border shadow p-3 mb-5 bg-body rounded">
+          <div class="col-2 border shadow p-3 mb-4 bg-body rounded">
             <ul class="list-unstyled">
               <li class="h5">Sunday</li>
               <li class="h6">Cloudy</li>
@@ -125,7 +127,7 @@
               <div class="col"><img src="src/images/cloudy.png" class="img-fluid" alt="Sunny"></div>
             </div>
           </div>
-          <div class="col-2  border shadow p-3 mb-5 bg-body rounded">
+          <div class="col-2  border shadow p-3 mb-4 bg-body rounded">
             <ul class="list-unstyled">
               <li class="h5">Monday</li>
               <li class="h6">Sunny</li>
