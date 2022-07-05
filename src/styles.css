@@ -29,3 +29,23 @@ body {
   width: 3px;
   background-color: #939aa9;
 }
+
+.autor-weather-widget {
+  padding: 20px;
+  color: orange;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  gap: 20px;
+}
+
+.autor-weather-widget__social-link {
+  width: 100%;
+  max-width: 25px;
+}
+
+.autor-weather-widget_autor-image {
+  width: 100%;
+  max-width: 50px;
+}
