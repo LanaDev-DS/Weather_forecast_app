@@ -3,6 +3,10 @@ body {
   color: #939aa9;
 }
 
+.city-name {
+  text-transform: capitalize;
+}
+
 .temperature-value {
   color: #fe9b09;
 }
@@ -11,6 +15,12 @@ body {
   width: 100%;
   max-width: 1240px;
   margin: 20px auto;
+}
+
+.units {
+  display: inline;
+  position: relative;
+  top: -34px;
 }
 
 .degree {
@@ -25,8 +35,8 @@ body {
 
 .pipe {
   display: inline-block;
-  height: 15px;
-  width: 3px;
+  height: 18px;
+  width: 2px;
   background-color: #939aa9;
 }
 
