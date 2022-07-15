@@ -56,6 +56,7 @@ const windEl = document.querySelector('#wind');
 const celsiusLink = document.querySelector('#celsius');
 const fahrenheitLink = document.querySelector('#fahrenheit');
 const currentLocationButton = document.querySelector('#current-location');
+const currentDayWeekElement = document.querySelector('#current-day-week');
 
 let currentUnit = 'C';
 let celsiusTemperature = 0;
@@ -78,7 +79,8 @@ function formatDate() {
   if (minutes < 10) {
     minutes = `0${minutes}`;
   }
-  return `${weekday}, ${date} ${month}, ${year}, ${hour}:${minutes}`;
+  currentDayWeekElement.innerHTML = weekday;
+  return `${date} ${month}, ${year}, ${hour}:${minutes}`;
 }
 
 function updateDateTimeOnView() {
