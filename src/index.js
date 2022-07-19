@@ -1,26 +1,26 @@
 const weekdays = [
-  'Sunday',
-  'Monday',
-  'Tuesday',
-  'Wednesday',
-  'Thursday',
-  'Friday',
-  'Saturday',
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
 ];
 
 let months = [
-  'January',
-  'February',
-  'March',
-  'April',
-  'May',
-  'June',
-  'July',
-  'August',
-  'September',
-  'October',
-  'November',
-  'December',
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
 ];
 
 const weatherIcons = {
@@ -44,26 +44,27 @@ const weatherIcons = {
   "50n": "src/icons/mist_n.png",
 };
 
-const searchFormEl = document.querySelector('#search-form');
-const searchInputEl = document.querySelector('#search-input');
-const cityEl = document.querySelector('#city');
-const temperatureEl = document.querySelector('#temperature');
-const iconElement = document.querySelector('#icon');
-const mainDescriptionEl = document.querySelector('#main-description');
-const descriptionEl = document.querySelector('#description');
-const humidityEl = document.querySelector('#humidity');
-const windEl = document.querySelector('#wind');
-const celsiusLink = document.querySelector('#celsius');
-const fahrenheitLink = document.querySelector('#fahrenheit');
-const currentLocationButton = document.querySelector('#current-location');
-const currentDayWeekElement = document.querySelector('#current-day-week');
+const searchFormEl = document.querySelector("#search-form");
+const searchInputEl = document.querySelector("#search-input");
+const cityEl = document.querySelector("#city");
+const temperatureEl = document.querySelector("#temperature");
+const iconElement = document.querySelector("#icon");
+const mainDescriptionEl = document.querySelector("#main-description");
+const descriptionElement = document.querySelector("#description");
+const humidityEl = document.querySelector("#humidity");
+const windEl = document.querySelector("#wind");
+const celsiusLink = document.querySelector("#celsius");
+const fahrenheitLink = document.querySelector("#fahrenheit");
+const currentLocationButton = document.querySelector("#current-location");
+const currentDayWeekElement = document.querySelector("#current-day-week");
+const forecastElement = document.querySelector("#forecast");
 
-let currentUnit = 'C';
+let currentUnit = "C";
 let celsiusTemperature = 0;
 
-const key = '1ad6e66daecab484d39c734aa3d7405a';
+const key = "1ad6e66daecab484d39c734aa3d7405a";
 const baseUrl = `https://api.openweathermap.org/data/2.5/weather?appid=${key}&units=metric`;
-const defaultCity = 'Kharkiv';
+const defaultCity = "Kharkiv";
 
 function formatDate() {
   const currentDate = new Date();
@@ -84,21 +85,69 @@ function formatDate() {
 }
 
 function updateDateTimeOnView() {
-  const newDate = document.querySelector('#data');
+  const newDate = document.querySelector("#data");
   newDate.innerHTML = formatDate();
 }
 
 updateDateTimeOnView();
 
+function formatDayForecast(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  return weekdays[day];
+}
+
+
+function forecastDisplay(response) {
+  let forecastDays = response.data.daily;
+  console.log(response.data.daily);
+  let forecastHTML = `<div class="row mb-5">`;
+  forecastDays.forEach(function (forecastDay, index) {
+    if (index < 7 && index !== 0) {
+      forecastHTML = forecastHTML + `
+        <div class='col border shadow p-2 m-2 bg-body rounded'>
+          <div class='mb-2'>${formatDayForecast(forecastDay.dt)}</div>
+          <div class='mb-2'>
+            <span class="weather-forecast-temperature-max">${Math.round(forecastDay.temp.max)}°</span>
+            <span class="weather-forecast-temperature-min">${Math.round(forecastDay.temp.min)}°</span>
+          </div>
+          <div> 
+            <img
+            src='${weatherIcons[forecastDay.weather[0].icon]}'
+            id='icon'
+            class='weather-forecast-icon'
+            alt='${forecastDay.weather[0].description}' />
+          </div>
+        </div>
+      `;
+    }
+  });
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+}
+
+function getforecast(coordinates) {
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${key}&units=metric`;
+  axios.get(apiUrl).then(forecastDisplay);
+}
+
 function showTemp(response) {
   celsiusTemperature = response.data.main.temp;
   temperatureEl.innerHTML = getFormattedTemp(celsiusTemperature, currentUnit);
-  iconElement.setAttribute('src', weatherIcons[response.data.weather[0].icon]);
-  iconElement.setAttribute('alt', response.data.weather[0].description);
+  iconElement.setAttribute("src", weatherIcons[response.data.weather[0].icon]);
+  iconElement.setAttribute("alt", response.data.weather[0].description);
   mainDescriptionEl.innerHTML = response.data.weather[0].main;
-  descriptionEl.innerHTML = `Description: ${response.data.weather[0].description}`;
+  descriptionElement.innerHTML = capitalizeFirstLetter(`${response.data.weather[0].description}`);
   humidityEl.innerHTML = `Humidity: ${response.data.main.humidity} %`;
   windEl.innerHTML = `Wind: ${Math.round(response.data.wind.speed)} km/h`;
+
+  getforecast(response.data.coord);
+}
+
+function capitalizeFirstLetter (sentence) {
+  sentence = sentence.split('');
+  sentence[0] = sentence[0].toUpperCase();
+  return sentence.join('');
 }
 
 function getWeatherByCityName(cityName) {
@@ -120,7 +169,7 @@ function searchCity(event) {
   }
 }
 
-searchFormEl.addEventListener('submit', searchCity);
+searchFormEl.addEventListener("submit", searchCity);
 
 cityEl.innerHTML = defaultCity;
 getWeatherByCityName(defaultCity);
@@ -139,28 +188,28 @@ function getCurrentPosition() {
   navigator.geolocation.getCurrentPosition(showPosition);
 }
 
-currentLocationButton.addEventListener('click', getCurrentPosition);
+currentLocationButton.addEventListener("click", getCurrentPosition);
 
 function getFormattedTemp(celsiusTemperature) {
-  if (currentUnit === 'C'){
+  if (currentUnit === "C") {
     return Math.round(celsiusTemperature);
   }
-  return  Math.round((celsiusTemperature * 9) / 5 + 32);
+  return Math.round((celsiusTemperature * 9) / 5 + 32);
 }
 
 function showCelsius(event) {
-  currentUnit = 'C';
+  currentUnit = "C";
   temperatureEl.innerHTML = getFormattedTemp(celsiusTemperature);
-  celsiusLink.classList.add('active');
-  fahrenheitLink.classList.remove('active');
+  celsiusLink.classList.add("active");
+  fahrenheitLink.classList.remove("active");
 }
 
 function showFahrenheit(event) {
-  currentUnit = 'F';
+  currentUnit = "F";
   temperatureEl.innerHTML = getFormattedTemp(celsiusTemperature);
-  celsiusLink.classList.remove('active');
-  fahrenheitLink.classList.add('active');
+  celsiusLink.classList.remove("active");
+  fahrenheitLink.classList.add("active");
 }
 
-celsiusLink.addEventListener('click', showCelsius);
-fahrenheitLink.addEventListener('click', showFahrenheit);
+celsiusLink.addEventListener("click", showCelsius);
+fahrenheitLink.addEventListener("click", showFahrenheit);
