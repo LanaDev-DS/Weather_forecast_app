@@ -204,6 +204,7 @@ function showFahrenheit(event) {
 function startApp(city) {
   cityEl.innerHTML = city;
   getWeatherByCityName(city);
+  updateDateTimeOnView();
 }
 
 celsiusLink.addEventListener("click", showCelsius);
