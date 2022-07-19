@@ -8,7 +8,7 @@ const weekdays = [
   "Saturday",
 ];
 
-let months = [
+const months = [
   "January",
   "February",
   "March",
@@ -89,14 +89,11 @@ function updateDateTimeOnView() {
   newDate.innerHTML = formatDate();
 }
 
-updateDateTimeOnView();
-
 function formatDayForecast(timestamp) {
   let date = new Date(timestamp * 1000);
   let day = date.getDay();
   return weekdays[day];
 }
-
 
 function forecastDisplay(response) {
   let forecastDays = response.data.daily;
@@ -126,8 +123,8 @@ function forecastDisplay(response) {
   forecastElement.innerHTML = forecastHTML;
 }
 
-function getforecast(coordinates) {
-  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${key}&units=metric`;
+function getForecast(coordinates) {
+  const apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${key}&units=metric`;
   axios.get(apiUrl).then(forecastDisplay);
 }
 
@@ -141,7 +138,7 @@ function showTemp(response) {
   humidityEl.innerHTML = `Humidity: ${response.data.main.humidity} %`;
   windEl.innerHTML = `Wind: ${Math.round(response.data.wind.speed)} km/h`;
 
-  getforecast(response.data.coord);
+  getForecast(response.data.coord);
 }
 
 function capitalizeFirstLetter (sentence) {
@@ -169,11 +166,6 @@ function searchCity(event) {
   }
 }
 
-searchFormEl.addEventListener("submit", searchCity);
-
-cityEl.innerHTML = defaultCity;
-getWeatherByCityName(defaultCity);
-
 function showPosition(position) {
   const lat = position.coords.latitude;
   const lon = position.coords.longitude;
@@ -187,8 +179,6 @@ function showPosition(position) {
 function getCurrentPosition() {
   navigator.geolocation.getCurrentPosition(showPosition);
 }
-
-currentLocationButton.addEventListener("click", getCurrentPosition);
 
 function getFormattedTemp(celsiusTemperature) {
   if (currentUnit === "C") {
@@ -211,5 +201,14 @@ function showFahrenheit(event) {
   fahrenheitLink.classList.add("active");
 }
 
+function startApp(city) {
+  cityEl.innerHTML = city;
+  getWeatherByCityName(city);
+}
+
 celsiusLink.addEventListener("click", showCelsius);
 fahrenheitLink.addEventListener("click", showFahrenheit);
+currentLocationButton.addEventListener("click", getCurrentPosition);
+searchFormEl.addEventListener("submit", searchCity);
+
+startApp(defaultCity);
